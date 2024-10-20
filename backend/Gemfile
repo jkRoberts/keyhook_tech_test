@@ -11,3 +11,5 @@ gem 'rake'
 gem 'sinatra-activerecord'
 
 gem 'sqlite3', '~> 1.5.0'
+
+gem 'pry'
