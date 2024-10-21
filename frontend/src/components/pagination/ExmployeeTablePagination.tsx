@@ -43,7 +43,7 @@ const ExmployeeTablePagination = ({setPagination, pagination, totalCount, totalP
           onClick={() => {
             setPagination({...pagination, pageIndex: totalPages - 1})
           }}
-          disabled={(pagination.pageIndex + 1) === totalPages - 1}
+          disabled={(pagination.pageIndex + 1) === totalPages}
         >
           {'>>'}
         </button>
@@ -56,7 +56,7 @@ const ExmployeeTablePagination = ({setPagination, pagination, totalCount, totalP
         </span>
       </div>
       <div>
-        Showing {(pagination.pageIndex + 1) * pagination.pageSize} of{' '}
+        Showing {(pagination.pageIndex + 1) === totalPages ? totalCount : (pagination.pageIndex + 1) * pagination.pageSize} {' '}of{' '}
         {totalCount} Rows
       </div>
     </>

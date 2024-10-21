@@ -1,15 +1,15 @@
 import { ColumnDef, useReactTable, getCoreRowModel, ColumnSort, SortingState, flexRender } from "@tanstack/react-table";
 import { useMemo } from "react";
-import { DataType } from "../../lib/types/EmployeeAttributeTypes";
+import { EmployeeDataType } from "../../lib/types/EmployeeAttributeTypes";
 
 interface EmployeeTableProps {
   setSorting: (value: SortingState | ((prevVar: SortingState) => SortingState)) => void,
   sorting: ColumnSort[],
-  columnData: DataType[]
+  columnData: EmployeeDataType[]
 }
 
 const EmployeeTable = ({setSorting, sorting, columnData}: EmployeeTableProps) => {
-  const columns = useMemo<ColumnDef<DataType>[]>(
+  const columns = useMemo<ColumnDef<EmployeeDataType>[]>(
     () => [
       {
         header: 'First Name',

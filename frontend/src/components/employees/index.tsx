@@ -5,6 +5,7 @@ import EmployeeNameFilterField from "../form/EmployeeNameFilterField";
 import ExmployeeTablePagination from "../pagination/ExmployeeTablePagination";
 import { EmployeesDataType } from "../../lib/types/EmployeeAttributeTypes";
 import fetchEmployeeData from "../../lib/request/fetchEmployeeData";
+import EmployeeDepartmentFilterField from "../form/EmployeeDepartmentFilterField";
 
 const employeeDefault:EmployeesDataType = {
   data: [{
@@ -36,7 +37,7 @@ const EmployeeSection = () => {
     pageSize: 20,
   })
   const [searchValue, setSearchValue] = useState('')
-
+  const [departmentFilter, setDepartmentFilter] = useState('')
   const [data, setData] = useState<EmployeesDataType>(employeeDefault)
 
   useEffect(() => {
@@ -51,15 +52,21 @@ const EmployeeSection = () => {
       pageIndex: pagination.pageIndex,
       pageSize: pagination.pageSize,
       searchValue,
+      departmentFilter,
       setData,
       setTotalCount,
-      setTotalPages}
-    );
-  }, [pagination.pageIndex, pagination.pageSize, searchValue, sorting]);
+      setTotalPages,
+    });
+  }, [pagination.pageIndex, pagination.pageSize, searchValue, sorting, departmentFilter]);
 
   return (
     <>
       <EmployeeNameFilterField setSearchValue={setSearchValue} />
+      <EmployeeDepartmentFilterField
+        departmentFilter={departmentFilter}
+        setDepartmentFilter={setDepartmentFilter}
+        setPagination={setPagination}
+      />
       <EmployeeTable
         setSorting={setSorting}
         sorting={sorting}

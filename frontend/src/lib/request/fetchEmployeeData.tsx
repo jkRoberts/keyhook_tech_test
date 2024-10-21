@@ -6,23 +6,25 @@ interface fetchDataProps {
   pageIndex: number
   pageSize: number
   searchValue: string
+  departmentFilter: string
   setData: (value: EmployeesDataType | ((prevVar: EmployeesDataType) => EmployeesDataType)) => void
   setTotalCount: (value: number | ((prevVar: number) => number)) => void
-  setTotalPages: (value: number | ((prevVar: number) => number)) => void
+  setTotalPages: (value: number | ((prevVar: number) => number)) => void,
 }
 
-const base_api = 'http://localhost:4567/api/v1/employees?stats[total]=count'
+const baseApi = 'http://localhost:4567/api/v1/employees?stats[total]=count'
 
 const fetchEmployeeData = async ({
   sortQuery,
   pageIndex,
   pageSize,
   searchValue,
+  departmentFilter,
   setData,
   setTotalCount,
-  setTotalPages
+  setTotalPages,
 }: fetchDataProps) => {
-  let apiPath = base_api
+  let apiPath = baseApi
 
   if(sortQuery) {
     apiPath += "&sort=" + sortQuery
@@ -32,8 +34,12 @@ const fetchEmployeeData = async ({
     apiPath += `&page[size]=${pageSize}}&page[number]=${pageIndex + 1}`
   }
 
-  if(searchValue) {
+  if(searchValue.length > 2) {
     apiPath += `&filter[name][fuzzy_match]=${searchValue}`
+  }
+
+  if(departmentFilter.length > 0) {
+    apiPath += `&filter[department_name][eq]=${departmentFilter}`
   }
 
   axios.get(apiPath)
@@ -41,7 +47,7 @@ const fetchEmployeeData = async ({
       setData(response?.data)
       const meta = response?.data.meta
       setTotalCount(meta.stats.total.count)
-      setTotalPages(Math.floor(meta.stats.total.count / pageSize))
+      setTotalPages(Math.ceil(meta.stats.total.count / pageSize))
     })
     .catch(function (error) {
       console.log(error);
