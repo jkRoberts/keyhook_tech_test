@@ -8,6 +8,8 @@ I have met all the requirements, except for the Full Name search, and Bonus 2.
 
 I was spinning in circles trying to find an eloquent way to do the Full Name Search in the filter scope for Graphiti, it would be good to discuss this. I did try a few approaches but was met with issues when it came to the paginations, I feel like there is an easy way to do it, and it'll be a quick thing to point out
 
+---
+
 ### Overview
 
 Our stack comprises of a rails backend using Graphiti to power our API. And a separate ReactJS app that powers our web and mobile apps ( we use CapacitorJS for our mobile app ).
