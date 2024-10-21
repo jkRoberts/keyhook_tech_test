@@ -49,13 +49,13 @@ const EmployeeTable = ({setSorting, sorting, columnData}: EmployeeTableProps) =>
 
   return(
     <>
-      <table>
+      <table className="w-full">
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header => {
                 return (
-                  <th key={header.id} colSpan={header.colSpan}>
+                  <th className="text-left border-b-2 border-stone-950" key={header.id} colSpan={header.colSpan}>
                     {header.isPlaceholder ? null : (
                       <div
                         className={
@@ -98,7 +98,7 @@ const EmployeeTable = ({setSorting, sorting, columnData}: EmployeeTableProps) =>
             .rows
             .map(row => {
               return (
-                <tr key={row.id}>
+                <tr className="even:bg-gray-50 odd:bg-white" key={row.id}>
                   {row.getVisibleCells().map(cell => {
                     return (
                       <td key={cell.id}>

@@ -60,25 +60,31 @@ const EmployeeSection = () => {
   }, [pagination.pageIndex, pagination.pageSize, searchValue, sorting, departmentFilter]);
 
   return (
-    <>
-      <EmployeeNameFilterField setSearchValue={setSearchValue} />
-      <EmployeeDepartmentFilterField
-        departmentFilter={departmentFilter}
-        setDepartmentFilter={setDepartmentFilter}
-        setPagination={setPagination}
-      />
-      <EmployeeTable
-        setSorting={setSorting}
-        sorting={sorting}
-        columnData={data?.data}
-      />
-      <ExmployeeTablePagination
-        setPagination={setPagination}
-        pagination={pagination}
-        totalPages={totalPages}
-        totalCount={totalCount}
-      />
-    </>
+    <div>
+      <div>
+        <EmployeeNameFilterField setSearchValue={setSearchValue} />
+        <EmployeeDepartmentFilterField
+          departmentFilter={departmentFilter}
+          setDepartmentFilter={setDepartmentFilter}
+          setPagination={setPagination}
+        />
+      </div>
+      <div className="">
+        <EmployeeTable
+          setSorting={setSorting}
+          sorting={sorting}
+          columnData={data?.data}
+        />
+      </div>
+      <div>
+        <ExmployeeTablePagination
+          setPagination={setPagination}
+          pagination={pagination}
+          totalPages={totalPages}
+          totalCount={totalCount}
+        />
+      </div>
+    </div>
   )
 };
 
