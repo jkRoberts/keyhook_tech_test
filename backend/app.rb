@@ -65,10 +65,9 @@ class EmployeeDirectoryApp < Sinatra::Application
     ActiveRecord::Base.connection_handler.clear_active_connections!
   end
 
-
   # to paginate - &page[size]=20&page[number]=2
   # to filter - &filter[department_name][eq]=IT
-  # to fuzzy filter - &filter[name][fuzzy_match]=IT
+  # to fuzzy filter - &filter[name][fuzzy_match]=zack
   # to sort - &sort=first_name (ASC) || &sort=-first_name (DESC)
   # total count - &stats[total]=count
 
