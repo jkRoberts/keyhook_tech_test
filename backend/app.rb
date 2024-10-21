@@ -33,15 +33,12 @@ class EmployeeResource < ApplicationResource
   attribute :last_name, :string
   attribute :age, :integer
   attribute :position, :string
-  attribute :department_name, :string do
-    @object.department.name
-  end
-  attribute :name, :string, readable: false do
-    "#{@object.first_name} #{@object.last_name}"
-  end
+  attribute :department_name, :string
+  attribute :name, :string, readable: false
 
   filter :name, single: true do
     fuzzy_match do |scope, value|
+      # TODO: do search on whole name, rather than piece of a name
       scope.where('first_name LIKE ? OR last_name LIKE ?', "%#{value}%", "%#{value}%")
     end
   end
@@ -50,6 +47,10 @@ class EmployeeResource < ApplicationResource
     eq do |scope, value|
       scope.joins(:department).where(department: {name: value})
     end
+  end
+
+  sort :department_name do |scope, direction|
+    scope.joins(:department).merge(Department.order(name: direction))
   end
 end
 

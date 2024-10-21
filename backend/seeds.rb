@@ -26,6 +26,14 @@ end
 
 class Employee < ApplicationRecord
   belongs_to :department
+
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  def department_name
+    department.name
+  end
 end
 
 class Department < ApplicationRecord
