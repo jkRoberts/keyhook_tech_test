@@ -48,10 +48,6 @@ class EmployeeResource < ApplicationResource
       scope.joins(:department).where(department: {name: value})
     end
   end
-
-  sort :department_name do |scope, direction|
-    scope.joins(:department).merge(Department.order(name: direction))
-  end
 end
 
 Graphiti.setup!
