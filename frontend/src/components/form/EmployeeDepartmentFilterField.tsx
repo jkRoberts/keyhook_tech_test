@@ -35,7 +35,7 @@ const EmployeeDepartmentFilterField = ({setDepartmentFilter, departmentFilter, s
     fetchDepartmentData({
       setDepartments
     });
-  }, [departmentFilter]);
+  }, []);
 
   const handleChange = ( e: { value: string } ) => {
     if(departmentFilter !== e.value) {
