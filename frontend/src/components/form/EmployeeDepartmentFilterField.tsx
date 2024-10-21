@@ -4,13 +4,14 @@ import { DepartmentsDataType } from "../../lib/types/EmployeeAttributeTypes";
 import Dropdown from "react-dropdown"
 import { PaginationState } from "@tanstack/react-table";
 
-
 interface EmployeeDepartmentFilterFieldProps {
   setDepartmentFilter: (value: string | ((prevVar: string) => string)) => void
   setPagination: (value: PaginationState | ((prevVar: PaginationState) => PaginationState)) => void
   departmentFilter: string
 }
 
+// Functional Component to set department filter. This allows us to filter the employee list by Departments
+// This will do a simple look up to get Department Name, and then pass that to the API Query
 const departmentsDefault:DepartmentsDataType = {
   data: [{
     id:"",

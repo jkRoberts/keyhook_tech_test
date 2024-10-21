@@ -33,9 +33,15 @@ class EmployeeResource < ApplicationResource
   attribute :last_name, :string
   attribute :age, :integer
   attribute :position, :string
+
+  # Created two custom attributes to allow for showing on the frontend, and
+  # doing a bit of extra filtering
+  # :name is for filtering, :department_name is to display
   attribute :department_name, :string
   attribute :name, :string, readable: false
 
+  # Filter that does look up on First and Last name to see if entered value exists
+  # Couldn't find a solution to do this on the full name, would be good to chat about
   filter :name, single: true do
     fuzzy_match do |scope, value|
       # TODO: do search on whole name, rather than piece of a name
@@ -43,6 +49,7 @@ class EmployeeResource < ApplicationResource
     end
   end
 
+  # Bonus 1 filter on departments
   filter :department_name, single: true do
     eq do |scope, value|
       scope.joins(:department).where(department: {name: value})
@@ -70,12 +77,14 @@ class EmployeeDirectoryApp < Sinatra::Application
   # to fuzzy filter - &filter[name][fuzzy_match]=zack
   # to sort - &sort=first_name (ASC) || &sort=-first_name (DESC)
   # total count - &stats[total]=count
-
+  # Relevant Endpoint for Employees, allows FE to do Sorting, Pagination
+  # Fuzzy filtering, and retrieve total counts
   get '/api/v1/employees' do
     employees = EmployeeResource.all(params)
     employees.to_jsonapi
   end
 
+  # Relevant Endpoint for Departments, this returns just the name of the department
   get '/api/v1/departments' do
     departments = DepartmentResource.all(params)
     departments.to_jsonapi

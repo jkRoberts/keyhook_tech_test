@@ -27,10 +27,12 @@ end
 class Employee < ApplicationRecord
   belongs_to :department
 
+  # Added name method in an attempt to do a look up using `.select` on the filtering side, but this caused other issues
   def name
     "#{first_name} #{last_name}"
   end
 
+  # Accesible method to retrieve department name
   def department_name
     department.name
   end

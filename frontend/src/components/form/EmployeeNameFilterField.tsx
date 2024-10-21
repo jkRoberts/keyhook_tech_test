@@ -2,6 +2,7 @@ interface EmployeeNameFilterFieldProps {
   setSearchValue: (value: string | ((prevVar: string) => string)) => void
 }
 
+// Functional Component to do a look up on Name. This will only become effective after two characters are entered
 const EmployeeNameFilterField = ({setSearchValue}:EmployeeNameFilterFieldProps) => {
 
   return(
@@ -12,7 +13,7 @@ const EmployeeNameFilterField = ({setSearchValue}:EmployeeNameFilterFieldProps) 
         name="filterByName"
         placeholder="Begin typing a name"
         onChange={(e) => {
-          if(e.target.value.length > 2) {
+          if(e.target.value.length > 1) {
             setSearchValue(e.target.value)
           } else {
             setSearchValue('')
